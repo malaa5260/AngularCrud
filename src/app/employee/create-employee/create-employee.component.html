@@ -1,0 +1,215 @@
+<div class="container my-5 ">
+ <div class="arrow"></div>
+  <form #formEmployee="ngForm" (ngSubmit)="saveEmployee(formEmployee)">
+    <div class="card text-primary my-5">
+      <div class="card-header bg-primary">
+        <h5 class="card-title text-white">Create Employee</h5>
+      </div>
+      <div class="card-body ">
+        <!-- <div class="row">
+          <div class="form-group mb-3 col-md-6">
+            <label class="mb-1" for="nameEn">Name EN <span class="text-danger">*</span></label>
+            <input id="nameEn" type="text" #nameEn="ngModel" class="form-control" name="nameEn"
+              [(ngModel)]="employee.nameEr" required maxlength="40" [SpecificLanguage]="'ENNoNum'"
+              (newItemEvent)="addNameEn($event)" />
+            <span *ngIf="nameEn.errors?.required &&
+            (nameEn.dirty || nameEn.touched)" class="form-text text-danger">
+              English Name is required
+            </span>
+            <span *ngIf="itemLanguageEn && (nameEn.invalid)" class="form-text text-danger">
+              Accept English Language Only
+            </span>
+
+          </div>
+          <div class="form-group mb-3 col-md-6">
+            <label class="mb-1" for="nameAr"> Name AR <span class="text-danger">*</span></label>
+            <input id="nameAr" type="text" #nameAr="ngModel" class="form-control" name="nameAr"
+              [(ngModel)]="employee.nameAr" required (newItemEvent)="addNameAr($event)"
+              [SpecificLanguage]="'ARNoNum'" />
+
+            <span *ngIf="nameAr.errors?.required &&
+               (nameAr.dirty || nameAr.touched)" class="form-text text-danger">
+              Arabic Name is required
+            </span>
+            <span *ngIf="itemLanguageAr && (nameAr.invalid)" class="form-text text-danger">
+              Accept Arabic Language Only
+            </span>
+          </div>
+        </div> -->
+        <!-- <div ngModelGroup="passwordGroup" appConfirmpassword #passwordGroup="ngModelGroup" [ngClass]="{ 'form-text text-danger new-group':  passwordGroup.errors?.notEqual
+                     && !confirmpassword.errors?.required}">
+          <div class="form-group mb-3">
+            <label class="mb-1" for="password"> Password <span class="text-danger">*</span></label>
+            <input id="password" type="text" class="form-control" #password="ngModel" name="password"
+              [(ngModel)]="employee.password" required />
+            <span *ngIf="password.invalid &&(password.touched || password.dirty)" class="form-text text-danger">
+              Enter a vaild Password
+            </span>
+          </div>
+          <div class="form-group mb-3">
+            <label class="mb-1" for="confirmpassword">Confirm Password <span class="text-danger">*</span></label>
+            <input id="confirmpassword" type="text" class="form-control" #confirmpassword="ngModel" name="confirmpassword"
+              [(ngModel)]="employee.confirmpassword" required />
+            <span *ngIf="confirmpassword.invalid &&(confirmpassword.touched || confirmpassword.dirty)"
+              class="form-text text-danger">
+              Enter a vaild Confirm Password
+            </span>
+            <span *ngIf="confirmpassword.touched && passwordGroup.errors?.notEqual && !confirmpassword.errors?.required"
+              class="form-text text-danger">
+              Password and Confirm Password does not match
+            </span>
+          </div>
+        </div> -->
+        <div class="form-group mb-3 ">
+          <label class="mb-1" for="nameEn">Name <span class="text-danger">*</span></label>
+          <input id="name"  type="text" #name="ngModel" class="form-control" name="name"
+            [(ngModel)]="employee.name" required maxlength="40" [SpecificLanguage]="'ENNoNum'"
+             />
+          <span *ngIf="name.errors?.required &&
+          (name.dirty || name.touched)" class="form-text text-danger">
+            English Name is required
+          </span>
+          
+        </div>
+        <div class="form-group mb-3">
+          <label class="mb-1" for="email"> Email <span class="text-danger"
+              *ngIf="contactPreference.value=='Email'">*</span></label>
+          <input id="email" type="email" class="form-control" #email="ngModel" name="email" [(ngModel)]="employee.email"
+            required pattern='[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$'
+            [required]="contactPreference.value=='Email'" />
+          <span *ngIf="email.errors?.pattern &&(email.touched || email.dirty)" class="form-text text-danger">
+            Enter a vaild Email
+          </span>
+          <span *ngIf="email.errors?.required" class="form-text text-danger">
+            Email is required
+          </span>
+        </div>
+        <div class="form-group mb-3">
+          <label class="mb-1" for="phone"> Phone <span class="text-danger"
+              *ngIf="contactPreference.value=='Phone'">*</span></label>
+          <input id="phone" type="text" class="form-control" #phone="ngModel" name="phone"
+            [(ngModel)]="employee.phoneNumber" [required]="contactPreference.value=='Phone'" numberOnly
+            (newItemEvent)="addPhoneNumber($event)" [PhoneNumber]="true" />
+          <span *ngIf="phone.errors?.required " class="form-text text-danger">
+            Phone Number is required
+          </span>
+          <span *ngIf="itemPhoneNumber && (phone.invalid)" class="form-text text-danger">
+            Accept Numbers Only
+          </span>
+        </div>
+        <div class="form-group mb-3">
+          <label class="mb-1"> Contact Preference <span class="text-danger">*</span></label>
+          <div class="form-control">
+            <label class="radio-inline mr-3">
+              <input type="radio" value="Email" name="contactPreference" [(ngModel)]="employee.contactPreference"
+                #contactPreference="ngModel" required />
+              Email
+            </label>
+            <label class="radio-inline">
+              <input type="radio" value="Phone" name="contactPreference" [(ngModel)]="employee.contactPreference"
+                #contactPreference="ngModel" required />
+              Phone
+            </label>
+
+          </div>
+        </div>
+        <span *ngIf="contactPreference.invalid && (contactPreference.dirty || contactPreference.touched )"
+          class="form-text text-danger mb-3">
+          Contact Preference Is Required
+        </span>
+
+        <div class="form-group mb-3">
+          <label for="dateOfBirth" class="mb-1">Date Of Birth <span class="text-danger">*</span></label>
+          <input  type="text" bsDatepicker [bsConfig]="datePickerConfig" class="form-control" required name="dateOfBirth"
+            placeholder="Birthday" [maxDate]="maxDate" #BirthdayControl="ngModel" [(ngModel)]="dateOfBirth" />
+          <span *ngIf="BirthdayControl.invalid &&
+                            (BirthdayControl.dirty || BirthdayControl.touched)" class="form-text text-danger">
+            Birthday is required.
+          </span>
+        </div>
+        <div class="row">
+          <div class="form-group mb-3 col-md-6 mt-3">
+            <label class="mb-1" for="photoPath"> Photo Path </label>
+            <input id="photoPath" type="text" class="form-control" name="photoPath" [(ngModel)]="employee.photoPath" />
+        
+          </div>
+          <div class="form-group col-md-6 mt-5">
+            <input class="btn btn-primary form-control" [value]="showPhotohere? 'Hide Photo':'Show Photo' "
+              (click)="showPhoto()" />
+          </div>
+        </div>
+        <div class="form-group" *ngIf="showPhotohere">
+          <img [src]="employee.photoPath" [alt]="employee.photoPath" height="200" width="200" />
+        </div>
+        <div class="form-group mb-3">
+          <label class="mb-1">Gender <span class="text-danger">*</span></label>
+          <div class="form-control">
+            <label class="radio-inline mr-3">
+              <input type="radio" value="male" name="gender" [(ngModel)]="employee.gender" #genderControler="ngModel"
+                required />
+              Male
+            </label>
+            <label class="radio-inline">
+              <input type="radio" value="female" name="gender" [(ngModel)]="employee.gender" #gender="ngModel"
+                required />
+              Female
+            </label>
+
+          </div>
+        </div>
+        <span *ngIf="gender.invalid && (gender.dirty || gender.touched )" class="form-text text-danger mb-3">
+          Gender Is Required
+        </span>
+
+        <div class="form-group mb-3 form-control">
+          <div class="">
+            <input type="checkbox" class="custom-control-input" id="isActive" name="isActive" #isActive="ngModel"
+              [(ngModel)]="employee.isActive" [required]="employee.isActive==null" />
+            <label class="custom-control-label " for="isActive"><span class="pleft">Is Active</span> </label>
+
+          </div>
+        </div>
+        <span *ngIf="isActive.invalid && (isActive.dirty || isActive.touched )" class="form-text text-danger mb-3">
+          Is Active Is Required
+        </span>
+        <div class="form-group mb-3">
+          <label class="mb-1" for="department">Departments <span class="text-danger">*</span></label>
+          <!-- <ng-select appSelectvalidator [items]="departments" 
+          required name="department" bindLabel="name" bindValue="id"
+            [multiple]="true" #department="ngModel" 
+            [(ngModel)]="employee.department"
+            placeholder="Select Department"
+            >
+          </ng-select> -->
+          <!-- <ng-select [(ngModel)]="employee.department" [multiple]="true" #department="ngModel" placeholder="Select Department">
+           
+              <ng-option *ngFor="let department of departments" [value]="department.id" [disabled]="department.id==1">{{department.name}}</ng-option>
+            
+          </ng-select> -->
+          
+          <select 
+            appSelectvalidator 
+            required
+            #department="ngModel"
+            [(ngModel)]="employee.department"
+            name="department"
+            id="department"
+            Class="form-control new-select"
+          >
+          <option value="-1">Select department</option>
+          <option *ngFor="let dep of departments" [value]="dep.id" >
+            {{dep.name}}
+          </option>
+          </select> 
+          <span *ngIf="department.errors?.defaultSelected &&(department.dirty || department.touched)"
+            class="form-text text-danger">
+            Department is required.
+          </span>
+        </div>
+      </div>
+      <div class="card-footer bg-light">
+        <button class="btn btn-primary btn-block" type="submit" [disabled]="formEmployee.invalid">Save</button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,11 @@
+<!-- 
+ <div *ngFor="let emp of employees" @enabledStateChange>
+    <app-dispaly-employee [employee]="emp"></app-dispaly-employee>
+ </div>
+-->
+
+<div class="container">
+ <button type="button"  (click)="nextEmployee()" class="btn btns mt-5" appHostListener >View Next Employee</button>
+   <app-dispaly-employee [employee]=" employeeToDisplay"></app-dispaly-employee>
+   <button class="btn  btns"appHostListener>Click here</button>
+</div>
