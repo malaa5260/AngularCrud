@@ -1,5 +1,5 @@
 <div class="container my-5 ">
- <div class="arrow"></div>
+
   <form #formEmployee="ngForm" (ngSubmit)="saveEmployee(formEmployee)">
     <div class="card text-primary my-5">
       <div class="card-header bg-primary">
@@ -196,7 +196,7 @@
             id="department"
             Class="form-control new-select"
           >
-          <option value="-1">Select department</option>
+          <option disabled>Select department</option>
           <option *ngFor="let dep of departments" [value]="dep.id" >
             {{dep.name}}
           </option>

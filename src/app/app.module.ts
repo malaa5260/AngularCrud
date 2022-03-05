@@ -19,6 +19,7 @@ import { DirectiveModule } from './directive/directive.module';
 import { SelectvalidatorrequiredDirective } from './directive/directives/selectvalidatorrequired.directive';
 import { ConfirmpasswordDirective } from './directive/directives/confirmpassword.directive';
 import { DispalyEmployeeComponent } from './employee/dispaly-employee/dispaly-employee.component';
+
 //import services
 // import { EmployeeService } from './services/employee.service';
 
@@ -44,7 +45,7 @@ const appRoutes:Routes=[
     SelectvalidatorrequiredDirective,
     ConfirmpasswordDirective,
     DispalyEmployeeComponent,
-
+    
   ],
   imports: [
     BrowserModule,

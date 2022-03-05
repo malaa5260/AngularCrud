@@ -1,11 +1,15 @@
-<!-- 
- <div *ngFor="let emp of employees" @enabledStateChange>
-    <app-dispaly-employee [employee]="emp"></app-dispaly-employee>
- </div>
--->
-
-<div class="container">
- <button type="button"  (click)="nextEmployee()" class="btn btns mt-5" appHostListener >View Next Employee</button>
-   <app-dispaly-employee [employee]=" employeeToDisplay"></app-dispaly-employee>
-   <button class="btn  btns"appHostListener>Click here</button>
+<div class="container my-5">
+   <div *ngIf="empData">
+      <h5>my name is : {{empData?.name }} and my gender is :
+       {{ empData?.gender}}</h5>
+   </div>
+   <div *ngFor="let emp of employees" @enabledStateChange >
+      <app-dispaly-employee [employee]="emp" (notify)="handleNotify($event)"></app-dispaly-employee>
+   </div>
 </div>
+
+<!-- <div class="container">
+ <button type="button"  (click)="nextEmployee()" class="btn btn-success mt-5" >View Next Employee</button>
+   <app-dispaly-employee [employee]="employeeToDisplay" [employeeId]="1" > </app-dispaly-employee>
+  
+</div> -->
