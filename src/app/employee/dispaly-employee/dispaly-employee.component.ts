@@ -67,6 +67,11 @@ export class DispalyEmployeeComponent implements OnInit, OnChanges {
     this.notify.emit(this.employee);
   }
   ngOnInit(): void {}
+  
+  getEmployeeNameAndGender():string{
+    return this.employee.name +' -- ' +this.employee.gender+ ' -- ' + this.employee.contactPreference;
+  }
+   
   // ngOnChanges life cycle hook
   ngOnChanges(changes: SimpleChanges) {
     // const previousEmployee = <Employee>changes.employee.previousValue;
