@@ -252,3 +252,6 @@ ng-select.ng-invalid.ng-touched .ng-select-container,select.ng-invalid.ng-touche
 	max-height: 300px;
 	overflow-y: auto;
 }
+a:hover{
+	text-decoration:none
+}
