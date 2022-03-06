@@ -14,20 +14,22 @@ import {BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ListEmployeesComponent } from './employee/list-employees/list-employees.component';
 import { CreateEmployeeComponent } from './employee/create-employee/create-employee.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { NotfoundComponent } from './notfound/notfound.component';
+import { NotfoundComponent } from './models/employee/notfound/notfound.component';
 import { DirectiveModule } from './directive/directive.module';
 import { SelectvalidatorrequiredDirective } from './directive/directives/selectvalidatorrequired.directive';
 import { ConfirmpasswordDirective } from './directive/directives/confirmpassword.directive';
 import { DispalyEmployeeComponent } from './employee/dispaly-employee/dispaly-employee.component';
 
-//import services
-// import { EmployeeService } from './services/employee.service';
+//import guards
+ import { CanDeactivateGuard } from './guards/can-deactivate-guard.guard';
 
 
 
 const appRoutes:Routes=[
   { path: 'list', component: ListEmployeesComponent },
-  { path: 'create', component: CreateEmployeeComponent },
+  { path: 'create', component: CreateEmployeeComponent, 
+     canDeactivate:[CanDeactivateGuard]
+  },
   { path:'' , redirectTo:'/list', pathMatch:'full' },
   { path:'**' , component:NotfoundComponent}
 

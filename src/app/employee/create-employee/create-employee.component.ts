@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Department } from 'app/models/employee/department.model';
 import { Employee } from 'app/models/employee/employee.model';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { EmployeeService } from '../../services/employee.service';
@@ -11,6 +10,10 @@ import {Router} from '@angular/router'
  
 })
 export class CreateEmployeeComponent implements OnInit {
+  
+  @ViewChild('formEmployee')
+  public createEmployeeForm:NgForm;
+
 
   itemLanguageEn:string;
   itemLanguageAr:string;
