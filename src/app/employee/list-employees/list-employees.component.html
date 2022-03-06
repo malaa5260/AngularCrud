@@ -3,11 +3,17 @@
       <h5>my name is : {{empData?.name }} and my gender is :
        {{ empData?.gender}}</h5>
    </div> -->
-   <h4 #employeeData></h4>
+   
+   <!-- 
+      template refrence replace @output
+      <h4 #employeeData></h4>
+   (click)="employeeData.innerHTML = childComponent.getEmployeeNameAndGender()"
+   #childComponent -->
    <div *ngFor="let emp of employees" @enabledStateChange >
-      <div (click)="employeeData.innerHTML = childComponent.getEmployeeNameAndGender()">
-         <app-dispaly-employee [employee]="emp" #childComponent></app-dispaly-employee>
-      </div>
+      <!-- (click)="onClick(emp.id)" -->
+      <a [routerLink]="['/employee',emp.id]">
+         <app-dispaly-employee [employee]="emp" ></app-dispaly-employee>
+      </a>
       
       <!-- (notify)="handleNotify($event)" -->
    </div>

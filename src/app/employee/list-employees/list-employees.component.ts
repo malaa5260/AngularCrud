@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, style, animate, transition, sequence } from '@angular/animations';
 import { EmployeeService } from '../../services/employee.service';
 import { Employee } from 'app/models/employee/employee.model';
-
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -23,9 +23,12 @@ export class ListEmployeesComponent implements OnInit {
   employees:Employee[];
   employeeToDisplay:Employee;
   private arrayIndex=1;
-  constructor(private _employeeService:EmployeeService) { }
+  constructor(private _employeeService:EmployeeService,private _router:Router) { }
   handleNotify(event:Employee){
     this.empData=event;
+  }
+  onClick(empId:number){
+  this._router.navigate(['/employee',empId]); 
   }
   ngOnInit(): void {
    this.employees= this._employeeService.getEmployees();

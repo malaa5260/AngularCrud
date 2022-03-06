@@ -22,6 +22,7 @@ import { DispalyEmployeeComponent } from './employee/dispaly-employee/dispaly-em
 
 //import guards
  import { CanDeactivateGuard } from './guards/can-deactivate-guard.guard';
+import { EmployeedetailsComponent } from './employee/employee-details/employeedetails.component';
 
 
 
@@ -30,6 +31,7 @@ const appRoutes:Routes=[
   { path: 'create', component: CreateEmployeeComponent, 
      canDeactivate:[CanDeactivateGuard]
   },
+  { path: 'employee/:id', component: EmployeedetailsComponent },
   { path:'' , redirectTo:'/list', pathMatch:'full' },
   { path:'**' , component:NotfoundComponent}
 
@@ -47,6 +49,7 @@ const appRoutes:Routes=[
     SelectvalidatorrequiredDirective,
     ConfirmpasswordDirective,
     DispalyEmployeeComponent,
+    EmployeedetailsComponent,
     
   ],
   imports: [
