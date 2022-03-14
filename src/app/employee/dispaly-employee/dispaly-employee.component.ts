@@ -15,7 +15,7 @@ import {
   transition,
   sequence,
 } from '@angular/animations';
-
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-dispaly-employee',
   templateUrl: './dispaly-employee.component.html',
@@ -60,18 +60,27 @@ export class DispalyEmployeeComponent implements OnInit, OnChanges {
   //   return this._employee;
   // }
 
+  selectedEmployeeId: number;
   @Input() employee: Employee;
   @Output() notify = new EventEmitter<Employee>();
-  constructor() {}
-  handelClick(){
+  constructor(private _route: ActivatedRoute) {}
+  handelClick() {
     this.notify.emit(this.employee);
   }
-  ngOnInit(): void {}
-  
-  getEmployeeNameAndGender():string{
-    return this.employee.name +' -- ' +this.employee.gender+ ' -- ' + this.employee.contactPreference;
+  ngOnInit(): void {
+    this.selectedEmployeeId = +this._route.snapshot.paramMap.get('id');
   }
-   
+
+  getEmployeeNameAndGender(): string {
+    return (
+      this.employee.name +
+      ' -- ' +
+      this.employee.gender +
+      ' -- ' +
+      this.employee.contactPreference
+    );
+  }
+
   // ngOnChanges life cycle hook
   ngOnChanges(changes: SimpleChanges) {
     // const previousEmployee = <Employee>changes.employee.previousValue;
@@ -81,9 +90,9 @@ export class DispalyEmployeeComponent implements OnInit, OnChanges {
     // );
     // console.log('currentEmployee :' + currentEmployee.name);
     for (const proName of Object.keys(changes)) {
-      const change=changes[proName];
-      const from =JSON.stringify(change.previousValue);
-      const to =JSON.stringify(change.currentValue);
+      const change = changes[proName];
+      const from = JSON.stringify(change.previousValue);
+      const to = JSON.stringify(change.currentValue);
       console.log(proName + ' changed from ' + from + ' to ' + to);
     }
   }
