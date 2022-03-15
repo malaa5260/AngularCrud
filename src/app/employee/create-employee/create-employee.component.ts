@@ -79,10 +79,12 @@ export class CreateEmployeeComponent implements OnInit {
       for (let controlsKey in empform.controls) {
         empform.controls[controlsKey].markAsTouched();
       }
-    
-      
     }
     this._employeeService.save(this.employee);
+    this.createEmployeeForm.reset({
+      // name:'test name',
+      // contactPreference: 'Phone'
+    });
     this._router.navigate(['list']);
   }
   
