@@ -80,7 +80,9 @@ export class CreateEmployeeComponent implements OnInit {
         empform.controls[controlsKey].markAsTouched();
       }
     }
-    this._employeeService.save(this.employee);
+    //using object not refernce to object by copy from object
+    const newEmployee:Employee = Object.assign({},this.employee);
+    this._employeeService.save(newEmployee);
     this.createEmployeeForm.reset({
       // name:'test name',
       // contactPreference: 'Phone'
