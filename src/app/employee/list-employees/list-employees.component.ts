@@ -19,6 +19,7 @@ import { Router } from '@angular/router';
     ],
 })
 export class ListEmployeesComponent implements OnInit {
+  searchTearm:string;
   empData:Employee;
   employees:Employee[];
   employeeToDisplay:Employee;

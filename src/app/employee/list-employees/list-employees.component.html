@@ -3,18 +3,23 @@
       <h5>my name is : {{empData?.name }} and my gender is :
        {{ empData?.gender}}</h5>
    </div> -->
-   
+
    <!-- 
       template refrence replace @output
       <h4 #employeeData></h4>
    (click)="employeeData.innerHTML = childComponent.getEmployeeNameAndGender()"
    #childComponent -->
-   <div *ngFor="let emp of employees" @enabledStateChange >
+   <div class="row">
+      <div class="form-group col-md-6">
+         <input [(ngModel)]="searchTearm" type="text" class="form-control" placeholder="Search By Name" />
+      </div>
+   </div>
+   <div *ngFor="let emp of employees  | employeeFilter:searchTearm" @enabledStateChange>
       <!-- (click)="onClick(emp.id)" -->
       <a [routerLink]="['/employee',emp.id]">
-         <app-dispaly-employee [employee]="emp" ></app-dispaly-employee>
+         <app-dispaly-employee [employee]="emp"></app-dispaly-employee>
       </a>
-      
+
       <!-- (notify)="handleNotify($event)" -->
    </div>
 </div>

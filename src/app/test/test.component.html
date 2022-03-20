@@ -1,0 +1,11 @@
+<div class="mt-5">
+    <input type="text" [(ngModel)]="languale" #inputData=ngModel />
+    <button type="button" (click)="addLanguage()">Add</button>
+    <button type="button" (click)="removeLanguage()">Remove</button>
+</div>
+<div class="bg-light">
+    <ul>
+        <li *ngFor="let language of listOfLanguage">{{language}}</li>
+    </ul>
+</div>
+<strong *ngIf="listOfLanguage.length > 3">Congrats you are Add more than 3 languages</strong>
