@@ -26,7 +26,7 @@ export class ListEmployeesComponent implements OnInit {
   public set searchTearm(value: string) {
     this._searchTearm = value;
     this.filteredEmployees=this.filterEmployees(value);
-    //this.searchTearm = this._route.snapshot.paramMap.get('searchTearm');
+    
   }
   filteredEmployees:Employee[];
   empData:Employee;
@@ -62,7 +62,11 @@ export class ListEmployeesComponent implements OnInit {
   ngOnInit(): void {
    this.employees= this._employeeService.getEmployees();
    this.employeeToDisplay=this.employees[0];
-   this.filteredEmployees=this.employees;
+   if(this._route.snapshot.queryParamMap.has('searchTearm')) {
+     this.searchTearm=this._route.snapshot.queryParamMap.get('searchTearm');
+   }else{
+    this.filteredEmployees=this.employees;
+   }
   
   }
   nextEmployee():void{

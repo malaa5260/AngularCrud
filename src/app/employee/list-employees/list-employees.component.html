@@ -17,7 +17,7 @@
          <button  (click)="changeName()" class="btn btn-primary" >change Employee</button>
       </div>
    </div>
-   <div *ngFor="let emp of filteredEmployees" @enabledStateChange>
+   <div *ngFor="let emp of filteredEmployees" >
       <!-- [routerLink]="['/employees',emp.id]" [queryParams]="{'searchTearm':searchTearm}"-->
       <a (click)="onClick(emp.id)"   >
          <app-dispaly-employee [employee]="emp"></app-dispaly-employee>
