@@ -2,11 +2,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Employee } from 'app/models/employee/employee.model';
 @Pipe({
   name: 'employeeFilter',
-  pure:true
+  pure:false
 })
 export class EmployeeFilterPipe implements PipeTransform {
-
+  private counter=0;
   transform(employees: Employee[],searchTearm:string):Employee[] {
+    this.counter++;
+    console.log('filter : ' + this.counter);
     if(!employees || !searchTearm){
       return employees;
     }

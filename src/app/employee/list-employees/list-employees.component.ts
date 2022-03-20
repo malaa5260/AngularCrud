@@ -28,8 +28,19 @@ export class ListEmployeesComponent implements OnInit {
   handleNotify(event:Employee){
     this.empData=event;
   }
+  changeName(){
+    //cahnge by reference valiable
+    this.employees[0].name='jordan';
+    // change by instance of valiable
+    // const newEmployeeArray:Employee[]=Object.assign([],this.employees);
+    // newEmployeeArray[0].name='jordan';
+    // this.employees=newEmployeeArray;
+  }
   onClick(empId:number){
   this._router.navigate(['/employee',empId]); 
+  }
+  onMouseMove(){
+
   }
   ngOnInit(): void {
    this.employees= this._employeeService.getEmployees();
