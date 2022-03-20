@@ -32,7 +32,7 @@ const appRoutes:Routes=[
   { path: 'create', component: CreateEmployeeComponent, 
      canDeactivate:[CanDeactivateGuard]
   },
-  { path: 'employee/:id', component: EmployeedetailsComponent },
+  { path: 'employees/:id', component: EmployeedetailsComponent },
   { path:'' , redirectTo:'/list', pathMatch:'full' },
   { path:'**' , component:NotfoundComponent}
 

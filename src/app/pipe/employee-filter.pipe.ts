@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Employee } from 'app/models/employee/employee.model';
 @Pipe({
   name: 'employeeFilter',
-  pure:false
+  pure:true
 })
 export class EmployeeFilterPipe implements PipeTransform {
   private counter=0;

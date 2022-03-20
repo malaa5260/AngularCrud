@@ -3,7 +3,7 @@ import { trigger, style, animate, transition, sequence } from '@angular/animatio
 import { EmployeeService } from '../../services/employee.service';
 import { Employee } from 'app/models/employee/employee.model';
 import { Router } from '@angular/router';
-
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-list-employees',
@@ -19,32 +19,51 @@ import { Router } from '@angular/router';
     ],
 })
 export class ListEmployeesComponent implements OnInit {
-  searchTearm:string;
+  private _searchTearm: string;
+  public get searchTearm(): string {
+    return this._searchTearm;
+  }
+  public set searchTearm(value: string) {
+    this._searchTearm = value;
+    this.filteredEmployees=this.filterEmployees(value);
+    //this.searchTearm = this._route.snapshot.paramMap.get('searchTearm');
+  }
+  filteredEmployees:Employee[];
   empData:Employee;
   employees:Employee[];
   employeeToDisplay:Employee;
   private arrayIndex=1;
-  constructor(private _employeeService:EmployeeService,private _router:Router) { }
+  constructor(private _employeeService:EmployeeService,private _router:Router,private _route:ActivatedRoute) { }
   handleNotify(event:Employee){
     this.empData=event;
+  }
+  filterEmployees(searchString:string){
+    return this.employees.filter(emp =>
+      emp.name.toLowerCase().indexOf(searchString.toLowerCase())!==-1);
+      
   }
   changeName(){
     //cahnge by reference valiable
     this.employees[0].name='jordan';
+    this.filteredEmployees=this.filterEmployees(this.searchTearm)
     // change by instance of valiable
     // const newEmployeeArray:Employee[]=Object.assign([],this.employees);
     // newEmployeeArray[0].name='jordan';
     // this.employees=newEmployeeArray;
   }
   onClick(empId:number){
-  this._router.navigate(['/employee',empId]); 
+  this._router.navigate(['/employees',empId],{
+    queryParams:{'searchTearm':this.searchTearm}
+  }); 
+ 
   }
-  onMouseMove(){
+ 
 
-  }
   ngOnInit(): void {
    this.employees= this._employeeService.getEmployees();
    this.employeeToDisplay=this.employees[0];
+   this.filteredEmployees=this.employees;
+  
   }
   nextEmployee():void{
   if(this.arrayIndex < this.employees.length){
