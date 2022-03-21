@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { trigger, style, animate, transition, sequence } from '@angular/animations';
-import { EmployeeService } from '../../services/employee.service';
+import {
+  trigger,
+  style,
+  animate,
+  transition,
+  sequence,
+} from '@angular/animations';
 import { Employee } from 'app/models/employee/employee.model';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
@@ -51,11 +56,15 @@ export class ListEmployeesComponent implements OnInit {
   employees: Employee[];
   employeeToDisplay: Employee;
   private arrayIndex = 1;
-  constructor(
-    private _employeeService: EmployeeService,
-    private _router: Router,
-    private _route: ActivatedRoute
-  ) {}
+  constructor(private _router: Router, private _route: ActivatedRoute) {
+    this.employees = this._route.snapshot.data['employeeList'];
+
+    if (this._route.snapshot.queryParamMap.has('searchTearm')) {
+      this.searchTearm = this._route.snapshot.queryParamMap.get('searchTearm');
+    } else {
+      this.filteredEmployees = this.employees;
+    }
+  }
   handleNotify(event: Employee) {
     this.empData = event;
   }
@@ -79,18 +88,7 @@ export class ListEmployeesComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this._employeeService.getEmployees().subscribe((resp) => {
-      this.employees = resp;
-      this.employeeToDisplay = this.employees[0];
-      if (this._route.snapshot.queryParamMap.has('searchTearm')) {
-        this.searchTearm =
-          this._route.snapshot.queryParamMap.get('searchTearm');
-      } else {
-        this.filteredEmployees = this.employees;
-      }
-    });
-  }
+  ngOnInit(): void {}
   nextEmployee(): void {
     if (this.arrayIndex < this.employees.length) {
       this.employeeToDisplay = this.employees[this.arrayIndex];

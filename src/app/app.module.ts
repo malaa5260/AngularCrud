@@ -24,10 +24,14 @@ import { TestComponent } from './test/test.component';
 import { CanDeactivateGuard } from './guards/can-deactivate-guard.guard';
 import { EmployeedetailsComponent } from './employee/employee-details/employeedetails.component';
 import { EmployeeFilterPipe } from './pipe/employee-filter.pipe';
-
+//impoport resolve services
+import{EmployeeListResolverService} from './services/employee-list-resolver.service';
 
 const appRoutes:Routes=[
-  { path: 'list', component: ListEmployeesComponent },
+  { path: 'list', 
+     component: ListEmployeesComponent,
+     resolve:{employeeList:EmployeeListResolverService}
+  },
   { path: 'test', component: TestComponent },
   { path: 'create', component: CreateEmployeeComponent, 
      canDeactivate:[CanDeactivateGuard]
