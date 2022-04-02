@@ -19,20 +19,20 @@ import { DirectiveModule } from './directive/directive.module';
 import { SelectvalidatorrequiredDirective } from './directive/directives/selectvalidatorrequired.directive';
 import { ConfirmpasswordDirective } from './directive/directives/confirmpassword.directive';
 import { DispalyEmployeeComponent } from './employee/dispaly-employee/dispaly-employee.component';
-import { TestComponent } from './test/test.component';
+
 //import guards
 import { CanDeactivateGuard } from './guards/can-deactivate-guard.guard';
 import { EmployeedetailsComponent } from './employee/employee-details/employeedetails.component';
 import { EmployeeFilterPipe } from './pipe/employee-filter.pipe';
 //impoport resolve services
 import{EmployeeListResolverService} from './services/employee-list-resolver.service';
+import { LoadingComponent } from './loading/loading.component';
 
 const appRoutes:Routes=[
   { path: 'list', 
      component: ListEmployeesComponent,
      resolve:{employeeList:EmployeeListResolverService}
   },
-  { path: 'test', component: TestComponent },
   { path: 'create', component: CreateEmployeeComponent, 
      canDeactivate:[CanDeactivateGuard]
   },
@@ -55,13 +55,13 @@ const appRoutes:Routes=[
     ConfirmpasswordDirective,
     DispalyEmployeeComponent,
     EmployeedetailsComponent,
-    TestComponent,
     EmployeeFilterPipe,
+    LoadingComponent,
     
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes,{enableTracing:true}),
+    RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
     FormsModule,
     NgbModule,
