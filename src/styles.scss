@@ -301,3 +301,22 @@ $element-sizes: (
     color: #fff !important;
   }
 }
+::-webkit-scrollbar {
+  height: 0.7em; /* height of horizontal scrollbar ← You're missing this */
+  width: 0.7em; /* width of vertical scrollbar */
+  border: inset 0 0 2px #adb5bd;
+}
+/*start scoller */
+::-webkit-scrollbar {
+  width: .7em !important;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 2px #adb5bd;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #04aa6d;
+  border-radius: 10px;
+}
+/*end scoller */
