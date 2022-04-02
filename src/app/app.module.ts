@@ -27,6 +27,7 @@ import { EmployeeFilterPipe } from './pipe/employee-filter.pipe';
 //impoport resolve services
 import{EmployeeListResolverService} from './services/employee-list-resolver.service';
 import { LoadingComponent } from './loading/loading.component';
+import { EmployeeDetailsGuardService } from './guards/employee-details-guard.guard';
 
 const appRoutes:Routes=[
   { path: 'list', 
@@ -36,7 +37,9 @@ const appRoutes:Routes=[
   { path: 'create', component: CreateEmployeeComponent, 
      canDeactivate:[CanDeactivateGuard]
   },
-  { path: 'employees/:id', component: EmployeedetailsComponent },
+  { path: 'employees/:id', component: EmployeedetailsComponent,
+    canActivate:[EmployeeDetailsGuardService]
+  },
   { path:'' , redirectTo:'/list', pathMatch:'full' },
   { path:'**' , component:NotfoundComponent}
 
