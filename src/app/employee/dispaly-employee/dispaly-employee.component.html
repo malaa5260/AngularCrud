@@ -1,88 +1,81 @@
 <!-- (click)="handelClick()" -->
-<div class="card text-primary mb-2 mt-3" [class.bg-active]="selectedEmployeeId===employee.id">
-  <div class="card-header bg-secondary cursor-pointer" (click)="isHidden=!isHidden">
-    <h4 class="card-title text-white d-inline-block">{{employee.name | uppercase}}</h4>
-    <span class="float-right pt-2 text-white"><i class="fa" [ngClass]="isHidden ? 'fa-minus': 'fa-plus'"></i></span>
-  </div>
-  <div class="card-body " *ngIf="isHidden">
+<app-accordian [title]="employee.name" [hasJustViewed]="selectedEmployeeId===employee.id">
+  <div class="col-md-10 mycard-body"  >
 
-    <div class="col-md-10">
+    <div class="row vertical-align">
 
-      <div class="row vertical-align">
+      <div class="col-md-4">
+        <img class="imageClass" [src]="employee.photoPath" />
+      </div>
+      <div class="col-md-8">
 
-        <div class="col-md-4">
-          <img class="imageClass" [src]="employee.photoPath" />
+        <div class="row" *ngIf="employee.gender">
+          <div class="col-md-6">
+            Gender
+          </div>
+          <div class="col-md-6">
+            : {{employee.gender}}
+          </div>
         </div>
-        <div class="col-md-8">
-
-          <div class="row" *ngIf="employee.gender">
-            <div class="col-md-6">
-              Gender
-            </div>
-            <div class="col-md-6">
-              : {{employee.gender}}
-            </div>
+        <div class="row" *ngIf="employee.dateOfBirth">
+          <div class="col-md-6">
+            Date of Birth
           </div>
-          <div class="row" *ngIf="employee.dateOfBirth">
-            <div class="col-md-6">
-              Date of Birth
-            </div>
-            <div class="col-md-6">
-              : {{employee.dateOfBirth |date: "dd/MM/yyyy"}}
-            </div>
+          <div class="col-md-6">
+            : {{employee.dateOfBirth |date: "dd/MM/yyyy"}}
           </div>
-          <div class="row" *ngIf="employee.contactPreference">
-            <div class="col-md-6">
-              Contact Preference
-            </div>
-            <div class="col-md-6">
-              : {{employee.contactPreference}}
-            </div>
+        </div>
+        <div class="row" *ngIf="employee.contactPreference">
+          <div class="col-md-6">
+            Contact Preference
           </div>
-          <div class="row" *ngIf="employee.phoneNumber">
-            <div class="col-md-6">
-              Phone
-            </div>
-            <div class="col-md-6">
-              : {{employee.phoneNumber}}
-            </div>
+          <div class="col-md-6">
+            : {{employee.contactPreference}}
           </div>
-          <div class="row" *ngIf="employee.email">
-            <div class="col-md-6">
-              Email
-            </div>
-            <div class="col-md-6">
-              : {{employee.email}}
-            </div>
+        </div>
+        <div class="row" *ngIf="employee.phoneNumber">
+          <div class="col-md-6">
+            Phone
           </div>
-          <div class="row" *ngIf="employee.department">
-            <div class="col-md-6">
-              Department
-            </div>
-            <div class="col-md-6" [ngSwitch]="employee.department">
-              :
-              <span *ngSwitchCase="1">Help Desk</span>
-              <span *ngSwitchCase="2">HR</span>
-              <span *ngSwitchCase="3">IT</span>
-              <span *ngSwitchCase="4">Payroll</span>
-              <span *ngSwitchDefault>N/A</span>
-            </div>
+          <div class="col-md-6">
+            : {{employee.phoneNumber}}
           </div>
-          <div class="row" *ngIf="employee.isActive">
-            <div class="col-md-6">
-              Is Active
-            </div>
-            <div class="col-md-6">
-              : {{employee.isActive}}
-            </div>
+        </div>
+        <div class="row" *ngIf="employee.email">
+          <div class="col-md-6">
+            Email
           </div>
-
+          <div class="col-md-6">
+            : {{employee.email}}
+          </div>
+        </div>
+        <div class="row" *ngIf="employee.department">
+          <div class="col-md-6">
+            Department
+          </div>
+          <div class="col-md-6" [ngSwitch]="employee.department">
+            :
+            <span *ngSwitchCase="1">Help Desk</span>
+            <span *ngSwitchCase="2">HR</span>
+            <span *ngSwitchCase="3">IT</span>
+            <span *ngSwitchCase="4">Payroll</span>
+            <span *ngSwitchDefault>N/A</span>
+          </div>
+        </div>
+        <div class="row" *ngIf="employee.isActive">
+          <div class="col-md-6">
+            Is Active
+          </div>
+          <div class="col-md-6">
+            : {{employee.isActive}}
+          </div>
         </div>
 
       </div>
+
     </div>
   </div>
-  <div class="card-footer" *ngIf="isHidden">
+  <div class="mycard-footer">
     <button class="btn btn-primary bttns" (click)="viewEmployee()">View</button>
     <div class="float-right">
       <button class="btn btn-secondary bttns  mx-2" (click)="editEmployee()">Edit</button>
@@ -96,7 +89,8 @@
       </button>
     </div>
   </div>
-</div>
+
+</app-accordian>
 
 
 
@@ -115,7 +109,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger" (click)="deleteEmployee(employee.id)" data-dismiss="modal">Delete </button>
+        <button type="button" class="btn btn-danger" (click)="deleteEmployee(employee.id)" data-dismiss="modal">Delete
+        </button>
       </div>
     </div>
   </div>

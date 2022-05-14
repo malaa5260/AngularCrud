@@ -8,6 +8,7 @@ import { Component, OnInit ,Input} from '@angular/core';
 export class AccordianComponent implements OnInit {
  @Input() hasJustViewed:boolean;
  @Input() title:string;
+ isHidden:boolean=false;
   constructor() { }
 
   ngOnInit(): void {

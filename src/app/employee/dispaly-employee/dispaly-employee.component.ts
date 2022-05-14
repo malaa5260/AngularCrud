@@ -68,7 +68,7 @@ export class DispalyEmployeeComponent implements OnInit, OnChanges {
   @Output() notify = new EventEmitter<Employee>();
   @Output() notifyDelete = new EventEmitter<number>();
   // confirmDelete:boolean=false;
-  isHidden: boolean=false;
+  
   constructor(private _route: ActivatedRoute,private _router:Router,private _employeeService: EmployeeService ,
     private _toastrService:ToastrService) {}
   handelClick() {
