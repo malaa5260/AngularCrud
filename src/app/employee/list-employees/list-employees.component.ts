@@ -56,6 +56,7 @@ export class ListEmployeesComponent implements OnInit {
   employees: Employee[];
   employeeToDisplay: Employee;
   private arrayIndex = 1;
+
   constructor(private _router: Router, private _route: ActivatedRoute) {
     this.employees = this._route.snapshot.data['employeeList'];
 
@@ -70,23 +71,23 @@ export class ListEmployeesComponent implements OnInit {
   }
   filterEmployees(searchString: string) {
     return this.employees.filter(
-      (emp) => emp.name.toLowerCase().indexOf(searchString.toLowerCase()) !== -1
+      emp => emp.name.toLowerCase().indexOf(searchString.toLowerCase()) !== -1
     );
   }
   changeName() {
     //cahnge by reference valiable
-    this.employees[0].name = 'jordan';
-    this.filteredEmployees = this.filterEmployees(this.searchTearm);
+    // this.employees[0].name = 'jordan';
+    // this.filteredEmployees = this.filterEmployees(this.searchTearm);
     // change by instance of valiable
     // const newEmployeeArray:Employee[]=Object.assign([],this.employees);
     // newEmployeeArray[0].name='jordan';
     // this.employees=newEmployeeArray;
   }
-  onClick(empId: number) {
-    this._router.navigate(['/employees', empId], {
-      queryParams: { searchTearm: this.searchTearm },
-    });
-  }
+  // onClick(empId: number) {
+  //   this._router.navigate(['/employees', empId], {
+  //     queryParams: { searchTearm: this.searchTearm },
+  //   });
+  // }
 
   ngOnInit(): void {}
   nextEmployee(): void {
@@ -100,6 +101,12 @@ export class ListEmployeesComponent implements OnInit {
     }
   }
 
+  onDeleteNotifcation(id:number){
+    const i = this.filteredEmployees.findIndex(e => e. id===id);
+    if(i !== -1){
+      this.filteredEmployees.splice(i,1);
+    }
+  }
   // @HostListener('click', ['$event'])
 
   // onClick() {

@@ -10,18 +10,16 @@
    (click)="employeeData.innerHTML = childComponent.getEmployeeNameAndGender()"
    #childComponent -->
    <div class="row">
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-12">
          <input [(ngModel)]="searchTearm" type="text" class="form-control" placeholder="Search By Name" />
       </div>
-      <div class="form-group col-md-6">
-         <button  (click)="changeName()" class="btn btn-primary" >change Employee</button>
-      </div>
-   </div>
+     
+   </div> 
    <div *ngFor="let emp of filteredEmployees" >
       <!-- [routerLink]="['/employees',emp.id]" [queryParams]="{'searchTearm':searchTearm}"-->
-      <a (click)="onClick(emp.id)"   >
-         <app-dispaly-employee [employee]="emp"></app-dispaly-employee>
-      </a>
+      <!-- <a (click)="onClick(emp.id)"   > -->
+         <app-dispaly-employee [employee]="emp" [searchTearm]="searchTearm" (notifyDelete)="onDeleteNotifcation($event)"></app-dispaly-employee>
+      <!-- </a> -->
 
       <!-- (notify)="handleNotify($event)" -->
    </div>

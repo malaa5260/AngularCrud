@@ -2,7 +2,8 @@
  import { Employee } from 'app/models/employee/employee.model';
  import { Observable,of } from 'rxjs';
  import { delay } from 'rxjs/operators';
- 
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -52,9 +53,25 @@ export class EmployeeService {
     return this.listEmpoloyees.find(e => e.id === id);
   }
   save(employee:Employee){
-    this.listEmpoloyees.push(employee);
+    if(employee.id === null){
+      //reduce array to single value 
+      const maxId = this.listEmpoloyees.reduce(function(e1,e2){
+        return (e1.id > e2.id) ? e1 : e2;
+      }).id;
+      employee.id = maxId+1;
+      this.listEmpoloyees.push(employee);
+    }else{
+      const foundIndex= this.listEmpoloyees.findIndex(e => e.id===employee.id );
+      this.listEmpoloyees[foundIndex] = employee;
+    }
+    
   }
-
+  deleteEmployee(id:number){
+    const i = this.listEmpoloyees.findIndex(e => e. id===id);
+    if(i !== -1){
+      this.listEmpoloyees.splice(i,1);
+    }
+  }
 
   constructor() { }
 }

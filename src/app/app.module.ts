@@ -24,17 +24,19 @@ import { DispalyEmployeeComponent } from './employee/dispaly-employee/dispaly-em
 import { CanDeactivateGuard } from './guards/can-deactivate-guard.guard';
 import { EmployeedetailsComponent } from './employee/employee-details/employeedetails.component';
 import { EmployeeFilterPipe } from './pipe/employee-filter.pipe';
+import { EmployeeDetailsGuardService } from './guards/employee-details-guard.guard';
 //impoport resolve services
 import{EmployeeListResolverService} from './services/employee-list-resolver.service';
 import { LoadingComponent } from './loading/loading.component';
-import { EmployeeDetailsGuardService } from './guards/employee-details-guard.guard';
+import { ToastrModule } from 'ngx-toastr';
+import { AccordianComponent } from './share/accordian/accordian.component';
 
 const appRoutes:Routes=[
   { path: 'list', 
      component: ListEmployeesComponent,
      resolve:{employeeList:EmployeeListResolverService}
   },
-  { path: 'create', component: CreateEmployeeComponent, 
+  { path: 'edit/:id', component: CreateEmployeeComponent, 
      canDeactivate:[CanDeactivateGuard]
   },
   { path: 'employees/:id', component: EmployeedetailsComponent,
@@ -44,8 +46,6 @@ const appRoutes:Routes=[
   { path:'**' , component:NotfoundComponent}
 
 ]
-
-
 
 @NgModule({
   declarations: [
@@ -60,6 +60,8 @@ const appRoutes:Routes=[
     EmployeedetailsComponent,
     EmployeeFilterPipe,
     LoadingComponent,
+    AccordianComponent,
+    
     
   ],
   imports: [
@@ -72,7 +74,7 @@ const appRoutes:Routes=[
     NgbDatepickerModule,
     BsDatepickerModule.forRoot(),
     DirectiveModule,
-    
+    ToastrModule.forRoot()
   ],
   providers: [
    

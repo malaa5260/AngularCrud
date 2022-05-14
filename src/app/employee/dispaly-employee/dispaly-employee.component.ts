@@ -8,6 +8,7 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { Employee } from 'app/models/employee/employee.model';
+import { EmployeeService } from '../../services/employee.service';
 import {
   trigger,
   style,
@@ -15,7 +16,8 @@ import {
   transition,
   sequence,
 } from '@angular/animations';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-dispaly-employee',
   templateUrl: './dispaly-employee.component.html',
@@ -62,15 +64,28 @@ export class DispalyEmployeeComponent implements OnInit, OnChanges {
 
   selectedEmployeeId: number;
   @Input() employee: Employee;
+  @Input() searchTearm : string;
   @Output() notify = new EventEmitter<Employee>();
-  constructor(private _route: ActivatedRoute) {}
+  @Output() notifyDelete = new EventEmitter<number>();
+  // confirmDelete:boolean=false;
+  isHidden: boolean=false;
+  constructor(private _route: ActivatedRoute,private _router:Router,private _employeeService: EmployeeService ,
+    private _toastrService:ToastrService) {}
   handelClick() {
     this.notify.emit(this.employee);
   }
+ 
   ngOnInit(): void {
     this.selectedEmployeeId = +this._route.snapshot.paramMap.get('id');
   }
-
+  viewEmployee(){
+    this._router.navigate(['/employees', this.employee.id], {
+      queryParams: { searchTearm: this.searchTearm },
+    });
+  }
+  editEmployee(){
+    this._router.navigate(['/edit', this.employee.id])
+  }
   getEmployeeNameAndGender(): string {
     return (
       this.employee.name +
@@ -80,7 +95,11 @@ export class DispalyEmployeeComponent implements OnInit, OnChanges {
       this.employee.contactPreference
     );
   }
-
+  deleteEmployee(id:number){
+    this._employeeService.deleteEmployee(id);
+    this._toastrService.success(this.employee.name + ' Deleted Successfully');
+    this.notifyDelete.emit(id);
+  }
   // ngOnChanges life cycle hook
   ngOnChanges(changes: SimpleChanges) {
     // const previousEmployee = <Employee>changes.employee.previousValue;

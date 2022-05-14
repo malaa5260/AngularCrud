@@ -1,9 +1,11 @@
 <div class="container my-5 ">
-
+  <div class="text-right">
+    <button type="button" class="btn btn-primary mb-2 " routerLink="/list">Back To List</button>
+  </div>
   <form #formEmployee="ngForm" (ngSubmit)="saveEmployee(formEmployee)">
-    <div class="card text-primary my-5">
+    <div class="card text-primary mb-5">
       <div class="card-header bg-primary">
-        <h5 class="card-title text-white">Create Employee</h5>
+        <h5 class="card-title text-white">{{cardTitle}}</h5>
       </div>
       <div class="card-body ">
         <!-- <div class="row">
@@ -121,7 +123,7 @@
         <div class="form-group mb-3">
           <label for="dateOfBirth" class="mb-1">Date Of Birth <span class="text-danger">*</span></label>
           <input  type="text" bsDatepicker [bsConfig]="datePickerConfig" class="form-control" required name="dateOfBirth"
-            placeholder="Birthday" [maxDate]="maxDate" #BirthdayControl="ngModel" [(ngModel)]="dateOfBirth" />
+            placeholder="Birthday" [maxDate]="maxDate" #BirthdayControl="ngModel" [(ngModel)]="employee.dateOfBirth" />
           <span *ngIf="BirthdayControl.invalid &&
                             (BirthdayControl.dirty || BirthdayControl.touched)" class="form-text text-danger">
             Birthday is required.
@@ -134,23 +136,23 @@
         
           </div>
           <div class="form-group col-md-6 mt-5">
-            <input class="btn btn-primary form-control" [value]="showPhotohere? 'Hide Photo':'Show Photo' "
+            <input class="btn btn-primary form-control" *ngIf="employee.photoPath !== '' && employee.photoPath!== null" [value]="showPhotohere? 'Hide Photo':'Show Photo' "
               (click)="showPhoto()" />
           </div>
         </div>
-        <div class="form-group" *ngIf="showPhotohere">
+        <div class="form-group" *ngIf="showPhotohere && employee.photoPath !== '' && employee.photoPath!== null">
           <img [src]="employee.photoPath" [alt]="employee.photoPath" height="200" width="200" />
         </div>
         <div class="form-group mb-3">
           <label class="mb-1">Gender <span class="text-danger">*</span></label>
           <div class="form-control">
             <label class="radio-inline mr-3">
-              <input type="radio" value="male" name="gender" [(ngModel)]="employee.gender" #genderControler="ngModel"
+              <input type="radio" value="Male" name="gender" [(ngModel)]="employee.gender" #genderControler="ngModel"
                 required />
               Male
             </label>
             <label class="radio-inline">
-              <input type="radio" value="female" name="gender" [(ngModel)]="employee.gender" #gender="ngModel"
+              <input type="radio" value="Female" name="gender" [(ngModel)]="employee.gender" #gender="ngModel"
                 required />
               Female
             </label>

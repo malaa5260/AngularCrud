@@ -1,11 +1,10 @@
 <!-- (click)="handelClick()" -->
-<div class="card text-primary mb-5 mt-3"  style="cursor: pointer;"
-  [class.bg-active]="selectedEmployeeId===employee.id"
->
-  <div class="card-header bg-light ">
-    <h3 class="card-title">{{employee.name | uppercase}}</h3>
+<div class="card text-primary mb-2 mt-3" [class.bg-active]="selectedEmployeeId===employee.id">
+  <div class="card-header bg-secondary cursor-pointer" (click)="isHidden=!isHidden">
+    <h4 class="card-title text-white d-inline-block">{{employee.name | uppercase}}</h4>
+    <span class="float-right pt-2 text-white"><i class="fa" [ngClass]="isHidden ? 'fa-minus': 'fa-plus'"></i></span>
   </div>
-  <div class="card-body ">
+  <div class="card-body " *ngIf="isHidden">
 
     <div class="col-md-10">
 
@@ -80,6 +79,43 @@
 
         </div>
 
+      </div>
+    </div>
+  </div>
+  <div class="card-footer" *ngIf="isHidden">
+    <button class="btn btn-primary bttns" (click)="viewEmployee()">View</button>
+    <div class="float-right">
+      <button class="btn btn-secondary bttns  mx-2" (click)="editEmployee()">Edit</button>
+      <!-- <span *ngIf="confirmDelete">
+        <span>Are you Sure To Confirm Delete {{employee.name}}?</span>
+        <button class="btn btn-danger" (click)="deleteEmployee(employee.id)">Yes</button>
+        <button class="btn btn-primary  mx-2" (click)="confirmDelete=false">No</button>
+      </span> -->
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+        Delete
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete {{employee.name}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <p>Are you Sure To Confirm Delete {{employee.name}}?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" (click)="deleteEmployee(employee.id)" data-dismiss="modal">Delete </button>
       </div>
     </div>
   </div>

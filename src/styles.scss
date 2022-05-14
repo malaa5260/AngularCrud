@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@ng-select/ng-select/themes/default.theme.css";
 @import "~ngx-bootstrap/datepicker/bs-datepicker.css";
-
+@import '~ngx-toastr/toastr';
 .imageClass {
   width: 200px;
   height: 200px;
@@ -317,7 +317,7 @@ $element-sizes: (
 
 ::-webkit-scrollbar-thumb {
   background-color: #04aa6d;
-  border-radius: 10px;
+  //border-radius: 10px;
 }
 /*end scoller */
 /*spinner start*/
@@ -338,3 +338,15 @@ $element-sizes: (
    100% {transform:rotate(360deg)}
  }
  /*spinner end*/
+ .card-footer .bttns{
+   width:100px;
+ }
+.btn {
+  cursor: pointer;
+}
+.cursor-pointer{
+  cursor: pointer;
+}
+.card-header{
+  padding:0.5rem 1.2rem!important;
+}
